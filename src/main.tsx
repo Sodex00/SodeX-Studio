@@ -45,6 +45,7 @@ const marqueeStack = [
   "Git",
   "Linux",
 ];
+const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
 
 function App() {
   const worksSectionRef = useRef<HTMLElement | null>(null);
@@ -90,7 +91,7 @@ function App() {
       <header className="topbar">
         <a className="brand" href="#hero" aria-label="SodeX Studio">
           <span className="brand-mark">
-            <img src="/SodeX-Studio/logo.png" alt="" />
+            <img src={logoUrl} alt="" />
           </span>
           <span>SodeX Studio</span>
         </a>
