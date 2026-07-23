@@ -59,6 +59,13 @@ function App() {
     if (!section || !rail) return;
 
     const updateMetrics = () => {
+      if (window.innerWidth <= 760) {
+        setWorksHeight(undefined);
+        section.style.setProperty("--project-shift", "0px");
+        rail.style.setProperty("--project-progress", "0");
+        return;
+      }
+
       const maxShift = Math.max(0, rail.scrollWidth - window.innerWidth + window.innerWidth * 0.06);
       const releaseOffset = Math.min(260, window.innerHeight * 0.22);
       setWorksHeight(window.innerHeight + Math.max(0, maxShift - releaseOffset));
@@ -66,6 +73,8 @@ function App() {
     };
 
     const updateScroll = () => {
+      if (window.innerWidth <= 760) return;
+
       const maxShift = Number.parseFloat(section.style.getPropertyValue("--project-shift")) || 0;
       const start = section.offsetTop;
       const usableShift = Math.max(1, section.offsetHeight - window.innerHeight);
@@ -74,14 +83,23 @@ function App() {
       setActiveProject(Math.min(projects.length, Math.max(1, Math.round(progress * (projects.length - 1)) + 1)));
     };
 
+    const updateMobileRail = () => {
+      if (window.innerWidth > 760) return;
+      const maxScroll = Math.max(1, rail.scrollWidth - rail.clientWidth);
+      const progress = Math.min(Math.max(rail.scrollLeft / maxScroll, 0), 1);
+      setActiveProject(Math.min(projects.length, Math.max(1, Math.round(progress * (projects.length - 1)) + 1)));
+    };
+
     updateMetrics();
     updateScroll();
     window.addEventListener("resize", updateMetrics);
     window.addEventListener("scroll", updateScroll, { passive: true });
+    rail.addEventListener("scroll", updateMobileRail, { passive: true });
 
     return () => {
       window.removeEventListener("resize", updateMetrics);
       window.removeEventListener("scroll", updateScroll);
+      rail.removeEventListener("scroll", updateMobileRail);
     };
   }, []);
 
