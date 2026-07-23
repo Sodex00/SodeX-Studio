@@ -89,7 +89,9 @@ function App() {
       <WebGLStage />
       <header className="topbar">
         <a className="brand" href="#hero" aria-label="SodeX Studio">
-          <span className="brand-mark">SX</span>
+          <span className="brand-mark">
+            <img src="/SodeX-Studio/logo.png" alt="" />
+          </span>
           <span>SodeX Studio</span>
         </a>
         <nav>
