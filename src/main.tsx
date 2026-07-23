@@ -6,10 +6,13 @@ import "./styles.css";
 
 const projects = [
   {
-    title: "Crimson Commerce",
-    type: "E-commerce system",
-    text: "Каталог с быстрым поиском, живыми карточками товаров и чистым checkout-flow.",
-    tech: "React / TypeScript / Node.js",
+    title: "InstallDV",
+    type: "Автосервис",
+    text: "Сайт-визитка для автосервиса в Хабаровске: услуги, контакты, быстрый звонок и понятная подача сервиса.",
+    tech: "React / TypeScript / Vite",
+    cover: "installdv-cover.png",
+    siteUrl: "https://installdv.ru",
+    repoUrl: "https://github.com/Sodex00/InstallDV",
   },
   {
     title: "Pulse Backend",
@@ -46,6 +49,7 @@ const marqueeStack = [
   "Linux",
 ];
 const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
+const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
 
 function App() {
   const worksSectionRef = useRef<HTMLElement | null>(null);
@@ -173,28 +177,59 @@ function App() {
             >
               {projects.map((project, index) => (
                 <article className="portfolio-slide" key={project.title}>
-                  <div className="project-preview">
-                    <div className="preview-topline">
-                      <span>SodeX Studio</span>
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                    </div>
-                    <div className="preview-orbit" />
-                    <div className="preview-grid">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                    <strong>{project.type}</strong>
-                  </div>
+                  <a
+                    className={`project-preview ${project.cover ? "project-preview-image" : ""}`}
+                    href={project.siteUrl ?? "#works"}
+                    target={project.siteUrl ? "_blank" : undefined}
+                    rel={project.siteUrl ? "noreferrer" : undefined}
+                    aria-label={project.siteUrl ? `Открыть сайт ${project.title}` : project.title}
+                  >
+                    {project.cover ? (
+                      <>
+                        <img src={assetUrl(project.cover)} alt={`Обложка проекта ${project.title}`} />
+                        <span className="preview-open">
+                          Live site <ArrowUpRight size={18} />
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="preview-topline">
+                          <span>SodeX Studio</span>
+                          <span>{String(index + 1).padStart(2, "0")}</span>
+                        </div>
+                        <div className="preview-orbit" />
+                        <div className="preview-grid">
+                          <span />
+                          <span />
+                          <span />
+                          <span />
+                        </div>
+                        <strong>{project.type}</strong>
+                      </>
+                    )}
+                  </a>
                   <div className="project-info">
                     <p>{project.type}</p>
                     <h3>{project.title}</h3>
                     <span>{project.text}</span>
                     <small>{project.tech}</small>
-                    <button aria-label={`Открыть ${project.title}`}>
-                      <ArrowUpRight size={22} />
-                    </button>
+                    <div className="project-actions">
+                      {project.repoUrl ? (
+                        <a className="repo-chip" href={project.repoUrl} target="_blank" rel="noreferrer">
+                          <Github size={18} />
+                          Source
+                        </a>
+                      ) : null}
+                      <a
+                        className="project-open"
+                        href={project.siteUrl ?? "#works"}
+                        target={project.siteUrl ? "_blank" : undefined}
+                        rel={project.siteUrl ? "noreferrer" : undefined}
+                        aria-label={`Открыть ${project.title}`}
+                      >
+                        <ArrowUpRight size={22} />
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
