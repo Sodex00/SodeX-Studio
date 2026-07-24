@@ -274,6 +274,11 @@ function App() {
             <span>Telegram</span>
             <strong>@NEVERLOSEE_YOURSELF</strong>
           </a>
+          <a href="https://t.me/SodeX_Studio" target="_blank" rel="noreferrer">
+            <Send size={20} />
+            <span>Telegram канал</span>
+            <strong>@SodeX_Studio</strong>
+          </a>
           <a href="mailto:zenavuken67570@gmail.com">
             <Mail size={20} />
             <span>Почта</span>
