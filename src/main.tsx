@@ -15,10 +15,13 @@ const projects = [
     repoUrl: "https://github.com/Sodex00/InstallDV",
   },
   {
-    title: "Pulse Backend",
-    type: "API platform",
-    text: "FastAPI-сервис с Docker-сборкой, PostgreSQL, авторизацией и понятной структурой.",
-    tech: "Python / FastAPI / PostgreSQL",
+    title: "DentaFlow",
+    type: "Демо стоматологии",
+    text: "Демо-сайт стоматологии с мягкой визуальной подачей, блоками услуг, подхода и быстрым переходом к записи.",
+    tech: "React / TypeScript / Node.js",
+    cover: "dentaflow-cover.png",
+    siteUrl: "https://sodex00.github.io/dentaflow/",
+    repoUrl: "https://github.com/Sodex00/dentaflow",
   },
   {
     title: "Signal Landing",
