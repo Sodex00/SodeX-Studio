@@ -24,10 +24,13 @@ const projects = [
     repoUrl: "https://github.com/Sodex00/dentaflow",
   },
   {
-    title: "Signal Landing",
-    type: "WebGL experience",
-    text: "Первый экран с 3D-графикой, темной сценой, плавной анимацией и сильным визуалом.",
-    tech: "Three.js / WebGL / CSS Motion",
+    title: "ProfitFlow",
+    type: "Личный трейдинг-трекер",
+    text: "Личный проект для учета сделок, контроля P&L, аналитики и наблюдения за крипторынком в одном темном интерфейсе.",
+    tech: "React / TypeScript / Binance API",
+    cover: "profitflow-cover.png",
+    siteUrl: "https://sodex00.github.io/ProfitFlow/",
+    repoUrl: "https://github.com/Sodex00/ProfitFlow",
   },
   {
     title: "Ops Core",
