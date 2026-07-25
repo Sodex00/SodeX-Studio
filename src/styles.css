@@ -327,8 +327,8 @@ h3 {
 
 .portfolio-slide {
   display: grid;
-  grid-template-columns: minmax(420px, 1.15fr) minmax(360px, 0.85fr);
-  gap: clamp(28px, 5vw, 72px);
+  grid-template-columns: minmax(420px, 1.08fr) minmax(380px, 0.92fr);
+  gap: clamp(28px, 4.2vw, 60px);
   align-items: center;
   min-height: min(520px, calc(100svh - 330px));
   padding: clamp(16px, 2.3vw, 28px);
@@ -523,10 +523,11 @@ h3 {
 }
 
 .project-info h3 {
-  max-width: 520px;
+  max-width: 100%;
   margin-bottom: 18px;
-  font-size: clamp(42px, 5vw, 78px);
-  line-height: 0.9;
+  overflow-wrap: anywhere;
+  font-size: clamp(40px, 4.25vw, 70px);
+  line-height: 0.92;
   text-transform: uppercase;
 }
 
