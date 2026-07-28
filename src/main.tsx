@@ -60,45 +60,58 @@ const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
 function App() {
   const worksSectionRef = useRef<HTMLElement | null>(null);
   const projectRailRef = useRef<HTMLDivElement | null>(null);
+  const [worksHeight, setWorksHeight] = useState<number>();
   const [activeProject, setActiveProject] = useState(1);
 
   useEffect(() => {
+    const section = worksSectionRef.current;
     const rail = projectRailRef.current;
-    if (!rail) return;
+    if (!section || !rail) return;
 
-    const updateRailState = () => {
+    const updateMetrics = () => {
+      if (window.innerWidth <= 760) {
+        setWorksHeight(undefined);
+        section.style.setProperty("--project-shift", "0px");
+        rail.style.setProperty("--project-progress", "0");
+        return;
+      }
+
+      const maxShift = Math.max(0, rail.scrollWidth - window.innerWidth + window.innerWidth * 0.06);
+      const releaseOffset = Math.min(260, window.innerHeight * 0.22);
+      setWorksHeight(window.innerHeight + Math.max(0, maxShift - releaseOffset));
+      section.style.setProperty("--project-shift", `${maxShift}px`);
+    };
+
+    const updateScroll = () => {
+      if (window.innerWidth <= 760) return;
+
+      const maxShift = Number.parseFloat(section.style.getPropertyValue("--project-shift")) || 0;
+      const start = section.offsetTop;
+      const usableShift = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = maxShift === 0 ? 0 : Math.min(Math.max((window.scrollY - start) / usableShift, 0), 1);
+      rail.style.setProperty("--project-progress", `${progress}`);
+      setActiveProject(Math.min(projects.length, Math.max(1, Math.round(progress * (projects.length - 1)) + 1)));
+    };
+
+    const updateMobileRail = () => {
+      if (window.innerWidth > 760) return;
       const maxScroll = Math.max(1, rail.scrollWidth - rail.clientWidth);
       const progress = Math.min(Math.max(rail.scrollLeft / maxScroll, 0), 1);
       setActiveProject(Math.min(projects.length, Math.max(1, Math.round(progress * (projects.length - 1)) + 1)));
     };
 
-    updateRailState();
-    window.addEventListener("resize", updateRailState);
-    rail.addEventListener("scroll", updateRailState, { passive: true });
+    updateMetrics();
+    updateScroll();
+    window.addEventListener("resize", updateMetrics);
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    rail.addEventListener("scroll", updateMobileRail, { passive: true });
 
     return () => {
-      window.removeEventListener("resize", updateRailState);
-      rail.removeEventListener("scroll", updateRailState);
+      window.removeEventListener("resize", updateMetrics);
+      window.removeEventListener("scroll", updateScroll);
+      rail.removeEventListener("scroll", updateMobileRail);
     };
   }, []);
-
-  const handleProjectWheel = (event: React.WheelEvent<HTMLElement>) => {
-    if (window.innerWidth <= 760) return;
-
-    const rail = projectRailRef.current;
-    if (!rail) return;
-
-    const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
-    const maxScroll = rail.scrollWidth - rail.clientWidth;
-    const nextScroll = Math.min(Math.max(rail.scrollLeft + delta * 1.18, 0), maxScroll);
-    const atStart = rail.scrollLeft <= 1 && delta < 0;
-    const atEnd = rail.scrollLeft >= maxScroll - 1 && delta > 0;
-
-    if (maxScroll <= 0 || atStart || atEnd) return;
-
-    event.preventDefault();
-    rail.scrollLeft = nextScroll;
-  };
 
   return (
     <main>
@@ -155,7 +168,7 @@ function App() {
         className="section works-section"
         id="works"
         ref={worksSectionRef}
-        onWheel={handleProjectWheel}
+        style={worksHeight ? { height: worksHeight } : undefined}
       >
         <div className="works-sticky">
           <div className="section-head">
