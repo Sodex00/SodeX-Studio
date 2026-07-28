@@ -279,20 +279,18 @@ h3 {
 
 .works-section {
   position: relative;
-  min-height: 100vh;
+  min-height: 100svh;
   padding: 0;
 }
 
 .works-sticky {
-  position: sticky;
-  top: 0;
+  position: relative;
   display: flex;
-  height: 100svh;
-  min-height: 720px;
+  min-height: 100svh;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding: 88px 0 30px;
+  padding: 88px 0 48px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background:
     linear-gradient(180deg, rgba(7, 5, 7, 0.72), rgba(7, 5, 7, 0.9)),
@@ -319,10 +317,18 @@ h3 {
   grid-auto-columns: min(1080px, 82vw);
   grid-auto-flow: column;
   gap: 28px;
-  width: max-content;
+  width: 100%;
   padding: 0 clamp(20px, 6vw, 88px);
-  transform: translate3d(calc(var(--project-progress, 0) * var(--project-shift, 0px) * -1), 0, 0);
-  will-change: transform;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: clamp(20px, 6vw, 88px);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  will-change: scroll-position;
+}
+
+.project-rail::-webkit-scrollbar {
+  display: none;
 }
 
 .portfolio-slide {
@@ -339,6 +345,7 @@ h3 {
     linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
     rgba(5, 5, 5, 0.82);
   backdrop-filter: blur(16px);
+  scroll-snap-align: start;
 }
 
 .rail-hint {
