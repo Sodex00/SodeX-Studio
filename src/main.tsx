@@ -41,12 +41,6 @@ const projects = [
     siteUrl: "https://sodex00.github.io/Coffman/",
     repoUrl: "https://github.com/Sodex00/Coffman",
   },
-  {
-    title: "Ops Core",
-    type: "DevOps tooling",
-    text: "Контейнеризация, окружения, базы данных и надежный запуск продукта без хаоса.",
-    tech: "Docker / MySQL / Linux",
-  },
 ];
 
 const marqueeStack = [
