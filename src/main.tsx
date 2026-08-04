@@ -33,6 +33,15 @@ const projects = [
     repoUrl: "https://github.com/Sodex00/ProfitFlow",
   },
   {
+    title: "Coffman",
+    type: "Specialty coffee bar",
+    text: "Атмосферный сайт для кофейни с темной премиальной подачей, меню, бронированием стола и мягкими визуальными акцентами.",
+    tech: "React / TypeScript / Vite",
+    cover: "coffman-cover.png",
+    siteUrl: "https://sodex00.github.io/Coffman/",
+    repoUrl: "https://github.com/Sodex00/Coffman",
+  },
+  {
     title: "Ops Core",
     type: "DevOps tooling",
     text: "Контейнеризация, окружения, базы данных и надежный запуск продукта без хаоса.",
