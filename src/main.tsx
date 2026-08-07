@@ -41,6 +41,15 @@ const projects = [
     siteUrl: "https://sodex00.github.io/Coffman/",
     repoUrl: "https://github.com/Sodex00/Coffman",
   },
+  {
+    title: "KvartLab",
+    type: "Демо ремонтной компании",
+    text: "Демо-сайт для ремонта квартир под ключ: чистая подача услуг, этапов работ, сметы и доверительного первого экрана.",
+    tech: "React / TypeScript / Vite",
+    cover: "kvartlab-cover.png",
+    siteUrl: "https://sodex00.github.io/KvartLab/",
+    repoUrl: "https://github.com/Sodex00/KvartLab",
+  },
 ];
 
 const marqueeStack = [
